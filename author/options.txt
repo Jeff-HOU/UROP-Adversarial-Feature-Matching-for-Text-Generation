@@ -1,0 +1,151 @@
+# You may want to check this file to look through the author’s params naming rules.
+# Some of them are redundant and confusing.
+
+n_words : word vocabulary size
+feature_maps : CNN embedding dimension for each width
+filter_hs : CNN width
+n_h : LSTM/GRU number of hidden units 
+n_h2: discriminative network number of hidden units
+n_gan: number of hidden units in GAN
+n_codes: number of latent codes 
+max_epochs : The maximum number of epoch to run
+lrate : learning rate
+batch_size : batch size during training
+valid_batch_size : The batch size used for validation/test set
+dispFreq : Display to stdout the training progress every N updates
+validFreq : Compute the validation error after this number of update.
+['batch_norm'] = False
+['batch_size'] = 256
+['cnn_activation'] = 'tanh'
+['cutoff'] = 0.01
+['debug'] = False
+['delta'] = 0.00
+['dg_ratio'] = 1
+['diag'] = 0.1
+['dim_mmd'] = dim_mmd
+['dispFreq'] = 10
+['feature_maps'] = 300
+['feature_match'] = 'mmd'
+['filter_shapes'] =
+	[feature_maps, 1,
+	 [filter_hs], img_w] =
+	[[300,1,3,300],
+	 [300,1,4,300],
+	 [300,1,5,300]]
+['filter_hs'] = [3,4,5]
+['force_cut'] = 'None'
+['img_w'] = 300
+['img_h'] = 148
+['input_recon_shape'] =
+		  [n_h2, n_feature]=
+		  [900,900]
+['input_shape'] =
+	        [n_h2_d, n_feature]=
+	        [200,900]
+['kde_sigma'] = 1.
+['label_sizes']=len(set(train_lab))=
+		UNKNOWN
+['label_smoothing'] = 0.01
+['lambda_q'] = 0
+['lambda_fm'] = 0.001
+['lambda_recon'] = 0.001
+['lr_d'] = 0.0001
+['lr_g'] = 0.00005
+['L'] = 1000
+['max_epochs'] = 16
+['max_step'] = 60
+['n_codes'] = 2
+['n_gan']=len(filter_hs)
+	  *feature_maps=900
+['n_h'] = 500
+['n_h2'] = 900
+['n_h2_d'] = 200
+['n_words'] = 22153
+['n_x'] = 300
+['n_z'] = ['feature_maps'] *
+	len(['filter_shapes’])=900
+	== [’n_gan’] == n_feature
+['recon_shape']=
+	[n_gan, n_h2]=[900,900]
+['saveFreq'] = 500
+['shareLSTM'] = True
+['sharedEmb'] = False
+['sigma_range'] = [20]
+['period'] = 887
+['pool_sizes’]=
+	[img_h-[filter_hs]+1, 1]=
+	[[146,1],[145,1],[144,1]]
+['pred_shape']=[1, n_h2_d]=
+	[1,200]
+['propose_shape']=
+	[n_codes, n_h2_d]=[2,200]
+['valid_batch_size'] = 256
+['validFreq'] = 500
+['wgan'] = False
+n_feature=len(['filter_hs'])*
+	  ['feature_maps’]=
+	  3*300=900
+d/g_params['Wemb']= 
+		[’n_words’]X[’n_x’]=
+		22153X300
+d/g_params[‘cnn_d_1/2/3_W’]=
+	[300,1,3/4/5,300]I=U
+d/g_params[‘cnn_d_1/2/3_b’]=
+	[3/4/5, ]I=0
+MLP: 200: num of hiddens
+     900: num of input features
+     1  : num of labels
+d/g_params[‘dis_d/q_W1’]=
+	[200, 900]I=U
+d/g_params[‘dis_d/q_b1’]=
+	[200]I=0.01
+d/g_params[‘dis_d/q_V1’]=
+	[1, 200]I=U#Author:[2,200]
+d/g_params[‘dis_d/q_c1’]=
+	[1]I=0.01
+d_params[‘recon_W1’]=
+	[900, 900]I=U
+d_params[‘recon_b1’]=
+	[900]I=0.01
+d_params[‘recon_V1’]=
+	[900, 900]I=U#Author:[2,200]
+d_params[‘recon_c1’]=
+	[900]I=0.01
+# batch norm
+d_params[‘real_beta’]=
+	[200]U=0.01
+d_params[‘real_gamma’]=
+	[200]U=0.1
+d_params[‘fake_beta’]=
+	[200]U=0.01
+d_params[‘fake_gamma’]=
+	[200]U=0.1
+# lstm (gen)
+g_params[‘decoder_0_W’]=[n_x,n_h]*4=
+	[300, 2000]I=U
+g_params[‘decoder_0_U’]=[n_h,n_h]*4=
+	[500, 2000]I=O
+g_params[‘decoder_0_C’]=[n_z,n_h]*4=
+	[900, 2000]I=U
+g_params[‘decoder_0_b’]=[n_h]*4=
+	[2000,]0,3,0,0
+g_params[‘decoder_0_C0’]=[n_z,n_h]=
+	[900, 500]I=U
+g_params[‘decoder_0_b0’]=[n_h]=
+	[500,]I=0
+g_params['Vhid’]=[n_h,n_x]=
+	[500, 300]I=U
+g_params['bhid’]=[n_words]=
+	[22153,]
+# build_model
+use_noise: shared var # for dropout
+x: n_sample * n_emb
+z: n_batch * n_feature
+n_z: n_batch
+n_sample = [‘batch_size’] = 256
+n_words = [’n_words’] = 22153
+n_x = d_params[‘Wemb’].shape[1]=
+	300 #emb dim
+# decoder_g
+n_h = g_params[‘decoder_U’].shape[0]
+	= 500
