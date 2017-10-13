@@ -1,5 +1,5 @@
 # UROP-Adversarial-Feature-Matching-for-Text-Generation
-This is my first [UROP](https://urop.ust.hk) project.
+This is my first [UROP](https://urop.ust.hk) project. Our guideline is [here](https://github.com/DeepSE/DeepCodingBaselines).
 
 It is an implementation and improvement to [this paper](/author/Adversarial-Feature-Matching-for-Text-Generation.pdf)
 Authors' code can be found under [author](/author)
