@@ -245,7 +245,7 @@ with tf.Session() as sess:
 			train_z = np.random.uniform(-1, 1, [batch_size, input_dim * len(window)]).astype('float32')
 			train_z[:, 0] = np.random.randint(2, size=batch_size).astype('float32')
 			if debug:
-					logger.info('g_cost， mmd before train: ')
+					logger.info('g_cost, mmd before train: ')
 					logger.info(sess.run([g_cost, mmd], feed_dict={x: train_x, z: train_z}))
 			_, gc = sess.run([g_optimizer, g_cost], feed_dict={x: train_x, z: train_z})
 			if debug:
